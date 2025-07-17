@@ -326,3 +326,5 @@ WITH
 ) AS SELECT * FROM gold.categories
 
 ```
+### Links to ADLS from Synapse
+<img width="284" height="158" alt="image" src="https://github.com/user-attachments/assets/7a677014-38b0-4151-9d5e-f83d0486511b" />
