@@ -192,3 +192,81 @@ df_shippers.write.format("delta")\
     .option("path","abfss://silver@adlssuppliers.dfs.core.windows.net/shippers")\
     .save()
 ```
+
+# Synapse Analytics
+
+```sql
+-- CREATE SCHEMA gold;
+
+-------- 01. create view
+CREATE VIEW gold.categories_vw
+AS
+SELECT *
+FROM
+    OPENROWSET(
+        BULK 'https://adlssuppliers.dfs.core.windows.net/silver/categories/',
+        FORMAT ='delta'
+    ) as categories
+
+---------- 02. create view
+CREATE VIEW gold.customers_vw
+AS
+SELECT *
+FROM
+    OPENROWSET(
+        BULK 'https://adlssuppliers.dfs.core.windows.net/silver/customers/',
+        FORMAT ='delta'
+    ) as customers
+
+ ---------- 03. create employees view
+CREATE VIEW gold.employees_vw
+AS
+SELECT *
+FROM
+    OPENROWSET(
+        BULK 'https://adlssuppliers.dfs.core.windows.net/silver/employees/',
+        FORMAT ='delta'
+    ) as employees
+
+ ---------- 04. create order_details view
+CREATE VIEW gold.order_details_vw
+AS
+SELECT *
+FROM
+    OPENROWSET(
+        BULK 'https://adlssuppliers.dfs.core.windows.net/silver/order_details/',
+        FORMAT ='delta'
+    ) as order_details
+
+---------- 05. create orders view
+CREATE VIEW gold.orders_vw
+AS
+SELECT *
+FROM
+    OPENROWSET(
+        BULK 'https://adlssuppliers.dfs.core.windows.net/silver/orders/',
+        FORMAT ='delta'
+    ) as orders
+
+---------- 06. create products view
+CREATE VIEW gold.products_vw
+AS
+SELECT *
+FROM
+    OPENROWSET(
+        BULK 'https://adlssuppliers.dfs.core.windows.net/silver/products/',
+        FORMAT ='delta'
+    ) as products
+
+---------- 07. create shippers view
+CREATE VIEW gold.shippers_vw
+AS
+SELECT *
+FROM
+    OPENROWSET(
+        BULK 'https://adlssuppliers.dfs.core.windows.net/silver/shippers/',
+        FORMAT ='delta'
+    ) as shippers
+```
+
+
