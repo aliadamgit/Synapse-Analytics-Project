@@ -268,5 +268,58 @@ FROM
         FORMAT ='delta'
     ) as shippers
 ```
+## Creating External Tables
+```sql
 
+-- set master key
 
+CREATE MASTER KEY ENCRYPTION BY PASSWORD ='sup123'
+-- create database scoped Credentials managed Identity to Authenticate
+-- and allow synapse to interacte with other azure services
+
+CREATE DATABASE SCOPED CREDENTIAL onprem_user
+WITH
+    IDENTITY = 'Managed Identity';
+ -- create external data source - conn between synapse and ADLS -- 2 data source - silver , gold
+
+CREATE EXTERNAL DATA SOURCE silver_layer_source
+    WITH
+    (
+        LOCATION = 'https://adlss.blob.core.windows.net/silver',
+        CREDENTIAL = onprem_user
+    )
+
+    CREATE EXTERNAL DATA SOURCE silver_layer_source
+    WITH
+    (
+        LOCATION = 'https://adlsgen2onprem.blob.core.windows.net/silver',
+        CREDENTIAL = onprem_user
+    )
+-------------------------------------------  gold
+
+    CREATE EXTERNAL DATA SOURCE gold_layer_source
+    WITH
+    (
+        LOCATION = 'https://adlsgen2onprem.blob.core.windows.net/gold',
+        CREDENTIAL = onprem_user
+    )
+
+ -- 4 --------- Create external file format
+    CREATE EXTERNAL FILE FORMAT parquet_format
+    WITH
+    (
+        FORMAT_TYPE = parquet,
+        data_compression = 'org.apache.hadoop.io.compress.GzipCodec'
+    )
+—------------------------------------------------------------------------------------
+
+-- 5 create external tables
+CREATE EXTERNAL TABLE gold.ext_categories
+WITH
+(
+    LOCATION = 'ext_categories',
+    DATA_SOURCE = gold_layer_source,
+    FILE_FORMAT = parquet_format
+) AS SELECT * FROM gold.categories
+
+```
