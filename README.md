@@ -156,4 +156,39 @@ df_orders.write.format("delta")\
     .option("path","abfss://silver@adlssuppliers.dfs.core.windows.net/orders")\
     .save()
 ```
+## 6. Products
+```python
+df_products = spark.read.format("parquet")\
+    .option("header", "true")\
+    .option("inferSchema", "true")\
+    .load("abfss://bronze@adlssuppliers.dfs.core.windows.net/products.parquet")
+display(df_products.head(2))
+```
+<img width="996" height="102" alt="image" src="https://github.com/user-attachments/assets/eb507826-0e16-4f1a-90fc-4497144c6e62" />
 
+### Write the Products data into Azure ADLS Silver Layer
+```python
+df_products.write.format("delta")\
+    .mode("overwrite")\
+    .option("path","abfss://silver@adlssuppliers.dfs.core.windows.net/products")\
+    .save()
+```
+
+## 7. Shippers
+```python
+df_shippers = spark.read.format("parquet")\
+    .option("header", "true")\
+    .option("inferSchema", "true")\
+    .load("abfss://bronze@adlssuppliers.dfs.core.windows.net/shippers.parquet")
+display(df_shippers.head(2))
+```
+
+<img width="340" height="99" alt="image" src="https://github.com/user-attachments/assets/7bba8cfe-cfec-4fa2-b338-ba6b42f2f21c" />
+
+### Write the Products data into Azure ADLS Silver Layer
+```python
+df_shippers.write.format("delta")\
+    .mode("overwrite")\
+    .option("path","abfss://silver@adlssuppliers.dfs.core.windows.net/shippers")\
+    .save()
+```
