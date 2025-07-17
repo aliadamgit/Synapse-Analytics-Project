@@ -77,4 +77,25 @@ df_categories.write.format("delta")\
     .option("path","abfss://silver@adlssuppliers.dfs.core.windows.net/categories")\
     .save()
 ```
+## Customers Table
 
+```python
+df_customers = spark.read.format("parquet")\
+    .option("header", "true")\
+    .option("inferSchema", "true")\
+    .load("abfss://bronze@adlssuppliers.dfs.core.windows.net/customers.parquet")
+display(df_customers.head(2))
+```
+```python
+df_customers = df_customers.drop("companyName","contactName","contactTitle")
+display(df_customers.head(3))
+```
+<img width="406" height="130" alt="image" src="https://github.com/user-attachments/assets/585e6f6b-135f-4efd-994e-9ce1bb25b46e" />
+
+## Write the data into Azure ADLS Silver Layer
+```python
+df_customers.write.format("delta")\
+    .mode("overwrite")\
+    .option("path","abfss://silver@adlssuppliers.dfs.core.windows.net/customers")\
+    .save()
+```
