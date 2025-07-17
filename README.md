@@ -19,7 +19,7 @@ This data was collected from Maven Analytics as [Northwind Traders](https://mave
 7 tables 
 2,985 records 
 
-Moving data from SQL Servr OnPrem to Azure ADLS
+Moving data from SQL Servr OnPrem to Azure ADLS Gen 2
 
 <img width="1280" height="720" alt="Project - moving data from onprem to ADLS" src="https://github.com/user-attachments/assets/83ce9ed1-db95-490b-be3e-79b4e9aa8193" />
 
@@ -30,6 +30,9 @@ Ingest the data into Azure Data Factory from SQL OnPrem
 Loaded files into Bronze Layer
 
 <img width="853" height="529" alt="image" src="https://github.com/user-attachments/assets/d0717416-d71b-4ef0-9c76-afa23f790b2c" />
+
+### connect Azure databriks to Azure ALDS Gen 2
+<img width="1280" height="720" alt="Project - connect Azure data briks to ALDS" src="https://github.com/user-attachments/assets/d0c3f646-a57c-40d4-a7a4-1f0867bc4411" />
 
 ```python
 from pyspark.sql.functions import *
