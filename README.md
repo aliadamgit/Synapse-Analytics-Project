@@ -326,5 +326,12 @@ WITH
 ) AS SELECT * FROM gold.categories
 
 ```
-### Links to ADLS from Synapse
+### Links to ADLS fen 2 from Synapse
 <img width="284" height="158" alt="image" src="https://github.com/user-attachments/assets/7a677014-38b0-4151-9d5e-f83d0486511b" />
+
+### Data Model in Power BI 
+<img width="1323" height="617" alt="image" src="https://github.com/user-attachments/assets/3280dcb5-8fa1-418b-af6a-11a59b4a5e5a" />
+
+### Suppliers Report using Power BI report 
+
+<img width="1268" height="717" alt="image" src="https://github.com/user-attachments/assets/2fedae6e-711a-440a-af92-87a0fc48b0af" />
